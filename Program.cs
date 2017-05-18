@@ -41,6 +41,7 @@ namespace payment_posting
             }
 
 
+
             foreach(var item in delimiterHat.payment.Distinct())
             {
                 Console.WriteLine("Amount : {0} ATM Ref : {1} Date : {2} Prime Account : {3} Bayad Center : {4}, Row : {5}", item.NAmount, item.SATM_Ref, item.DDate, item.SPrimeAccount, item.SPaymentCenter, item.NRow);
