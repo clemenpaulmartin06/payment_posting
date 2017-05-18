@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ebacs_via_linked_serverModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="payment_center">
+          <Key>
+            <PropertyRef Name="pc_id" />
+          </Key>
+          <Property Name="pc_id" Type="int" Nullable="false" />
+          <Property Name="payment_center" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="data_path" Type="varchar" MaxLength="1000" />
+          <Property Name="archive_path" Type="varchar" MaxLength="1000" />
+          <Property Name="nActive" Type="int" />
+          <Property Name="nSpecial" Type="int" />
+          <Property Name="specialStringForDate" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Function Name="ClearTreasurerReceipts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nReceiptType" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="CollPostPaymentMain1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sORNo" Type="varchar" Mode="In" />
+          <Parameter Name="sAccountID" Type="varchar" Mode="In" />
+          <Parameter Name="nORAmount" Type="decimal" Mode="In" />
+          <Parameter Name="dPaymentDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="bReConnect" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="GenerateTreasurerReceipt1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dFromPaymentDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="dToPaymentDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="dTreasurerReceiptDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="nFromTerminalID" Type="tinyint" Mode="In" />
+          <Parameter Name="nToTerminalID" Type="tinyint" Mode="In" />
+          <Parameter Name="nReceiptType" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="getMOInProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetTotalBillingAmountPerDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dFrDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="dToDate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="GetTotalCollectionAmountPerDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dFrDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="dToDate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="GetTotalOtherBillingAmountPerDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dFrDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="dToDate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="parse_data_format" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pc_id" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="view_payment_center" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ebacs_via_linked_serverModelStoreContainer">
+          <EntitySet Name="payment_center" EntityType="Self.payment_center" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ebacs_via_linked_serverModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="paymentEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="parse_data_format" ReturnType="Collection(ebacs_via_linked_serverModel.parse_data_format_Result)">
+          <Parameter Name="pc_id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ClearTreasurerReceipts" ReturnType="Collection(Int32)">
+          <Parameter Name="nReceiptType" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="CollPostPaymentMain1" ReturnType="Collection(Int32)">
+            <Parameter Name="sORNo" Mode="In" Type="String" />
+            <Parameter Name="sAccountID" Mode="In" Type="String" />
+            <Parameter Name="nORAmount" Mode="In" Type="Decimal" />
+            <Parameter Name="dPaymentDate" Mode="In" Type="DateTime" />
+            <Parameter Name="bReConnect" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateTreasurerReceipt1" ReturnType="Collection(Int32)">
+            <Parameter Name="dFromPaymentDate" Mode="In" Type="DateTime" />
+            <Parameter Name="dToPaymentDate" Mode="In" Type="DateTime" />
+            <Parameter Name="dTreasurerReceiptDate" Mode="In" Type="DateTime" />
+            <Parameter Name="nFromTerminalID" Mode="In" Type="Byte" />
+            <Parameter Name="nToTerminalID" Mode="In" Type="Byte" />
+            <Parameter Name="nReceiptType" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="getMOInProgress" ReturnType="Collection(ebacs_via_linked_serverModel.getMOInProgress_Result)" />
+          <FunctionImport Name="GetTotalBillingAmountPerDateRange" ReturnType="Collection(Decimal)">
+            <Parameter Name="dFrDate" Mode="In" Type="DateTime" />
+            <Parameter Name="dToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetTotalCollectionAmountPerDateRange" ReturnType="Collection(Decimal)">
+            <Parameter Name="dFrDate" Mode="In" Type="DateTime" />
+            <Parameter Name="dToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetTotalOtherBillingAmountPerDateRange" ReturnType="Collection(Decimal)">
+            <Parameter Name="dFrDate" Mode="In" Type="DateTime" />
+            <Parameter Name="dToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="payment_center" EntityType="ebacs_via_linked_serverModel.payment_center" />
+          <FunctionImport Name="view_payment_center" ReturnType="Collection(ebacs_via_linked_serverModel.view_payment_center_Result)" />
+        </EntityContainer>
+        <ComplexType Name="parse_data_format_Result">
+          <Property Type="String" Name="pc_id" Nullable="false" MaxLength="2" />
+          <Property Type="Int32" Name="parse_amount_start" Nullable="true" />
+          <Property Type="Int32" Name="parse_amount_end" Nullable="true" />
+          <Property Type="Int32" Name="parse_atm_ref_start" Nullable="true" />
+          <Property Type="Int32" Name="parse_atm_ref_end" Nullable="true" />
+          <Property Type="Int32" Name="parse_date_start" Nullable="true" />
+          <Property Type="Int32" Name="parse_date_end" Nullable="true" />
+          <Property Type="Int32" Name="parse_prime_account_start" Nullable="true" />
+          <Property Type="Int32" Name="parse_prime_account_end" Nullable="true" />
+          <Property Type="Int32" Name="column_amount" Nullable="true" />
+          <Property Type="Int32" Name="column_atm_ref" Nullable="true" />
+          <Property Type="Int32" Name="column_date" Nullable="true" />
+          <Property Type="Int32" Name="column_prime_account" Nullable="true" />
+          <Property Type="String" Name="file_extension" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="separator" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="data_path" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="archive_path" Nullable="true" MaxLength="1000" />
+        </ComplexType>
+        <ComplexType Name="getMOInProgress_Result">
+          <Property Type="String" Name="sDescription" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="nBookSequence" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="payment_center">
+          <Key>
+            <PropertyRef Name="pc_id" />
+          </Key>
+          <Property Name="pc_id" Type="Int32" Nullable="false" />
+          <Property Name="payment_center1" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="data_path" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="archive_path" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="nActive" Type="Int32" />
+          <Property Name="nSpecial" Type="Int32" />
+          <Property Name="specialStringForDate" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="view_payment_center_Result">
+          <Property Type="Int32" Name="pc_id" Nullable="false" />
+          <Property Type="Int32" Name="parse_amount_start" Nullable="true" />
+          <Property Type="Int32" Name="parse_amount_end" Nullable="true" />
+          <Property Type="Int32" Name="parse_atm_ref_start" Nullable="true" />
+          <Property Type="Int32" Name="parse_atm_ref_end" Nullable="true" />
+          <Property Type="Int32" Name="parse_date_start" Nullable="true" />
+          <Property Type="Int32" Name="parse_date_end" Nullable="true" />
+          <Property Type="Int32" Name="parse_prime_account_start" Nullable="true" />
+          <Property Type="Int32" Name="parse_prime_account_end" Nullable="true" />
+          <Property Type="Int32" Name="column_amount" Nullable="true" />
+          <Property Type="Int32" Name="column_atm_ref" Nullable="true" />
+          <Property Type="Int32" Name="column_date" Nullable="true" />
+          <Property Type="Int32" Name="column_prime_account" Nullable="true" />
+          <Property Type="String" Name="file_extension" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="separator" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="data_path" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="archive_path" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="payment_center" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="nSpecial" Nullable="true" />
+          <Property Type="String" Name="specialStringForDate" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="result_path" Nullable="true" MaxLength="1500" />
+          <Property Type="String" Name="error_path" Nullable="true" MaxLength="1500" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ebacs_via_linked_serverModelStoreContainer" CdmEntityContainer="paymentEntities" >
+          <FunctionImportMapping FunctionImportName="parse_data_format" FunctionName="ebacs_via_linked_serverModel.Store.parse_data_format">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ebacs_via_linked_serverModel.parse_data_format_Result">
+                <ScalarProperty Name="pc_id" ColumnName="pc_id" />
+                <ScalarProperty Name="parse_amount_start" ColumnName="parse_amount_start" />
+                <ScalarProperty Name="parse_amount_end" ColumnName="parse_amount_end" />
+                <ScalarProperty Name="parse_atm_ref_start" ColumnName="parse_atm_ref_start" />
+                <ScalarProperty Name="parse_atm_ref_end" ColumnName="parse_atm_ref_end" />
+                <ScalarProperty Name="parse_date_start" ColumnName="parse_date_start" />
+                <ScalarProperty Name="parse_date_end" ColumnName="parse_date_end" />
+                <ScalarProperty Name="parse_prime_account_start" ColumnName="parse_prime_account_start" />
+                <ScalarProperty Name="parse_prime_account_end" ColumnName="parse_prime_account_end" />
+                <ScalarProperty Name="column_amount" ColumnName="column_amount" />
+                <ScalarProperty Name="column_atm_ref" ColumnName="column_atm_ref" />
+                <ScalarProperty Name="column_date" ColumnName="column_date" />
+                <ScalarProperty Name="column_prime_account" ColumnName="column_prime_account" />
+                <ScalarProperty Name="file_extension" ColumnName="file_extension" />
+                <ScalarProperty Name="separator" ColumnName="separator" />
+                <ScalarProperty Name="data_path" ColumnName="data_path" />
+                <ScalarProperty Name="archive_path" ColumnName="archive_path" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ClearTreasurerReceipts" FunctionName="ebacs_via_linked_serverModel.Store.ClearTreasurerReceipts" />
+          <FunctionImportMapping FunctionImportName="CollPostPaymentMain1" FunctionName="ebacs_via_linked_serverModel.Store.CollPostPaymentMain1" />
+          <FunctionImportMapping FunctionImportName="GenerateTreasurerReceipt1" FunctionName="ebacs_via_linked_serverModel.Store.GenerateTreasurerReceipt1" />
+          <FunctionImportMapping FunctionImportName="getMOInProgress" FunctionName="ebacs_via_linked_serverModel.Store.getMOInProgress">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ebacs_via_linked_serverModel.getMOInProgress_Result">
+                <ScalarProperty Name="sDescription" ColumnName="sDescription" />
+                <ScalarProperty Name="nBookSequence" ColumnName="nBookSequence" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTotalBillingAmountPerDateRange" FunctionName="ebacs_via_linked_serverModel.Store.GetTotalBillingAmountPerDateRange" />
+          <FunctionImportMapping FunctionImportName="GetTotalCollectionAmountPerDateRange" FunctionName="ebacs_via_linked_serverModel.Store.GetTotalCollectionAmountPerDateRange" />
+          <FunctionImportMapping FunctionImportName="GetTotalOtherBillingAmountPerDateRange" FunctionName="ebacs_via_linked_serverModel.Store.GetTotalOtherBillingAmountPerDateRange" />
+          <EntitySetMapping Name="payment_center">
+            <EntityTypeMapping TypeName="ebacs_via_linked_serverModel.payment_center">
+              <MappingFragment StoreEntitySet="payment_center">
+                <ScalarProperty Name="specialStringForDate" ColumnName="specialStringForDate" />
+                <ScalarProperty Name="nSpecial" ColumnName="nSpecial" />
+                <ScalarProperty Name="nActive" ColumnName="nActive" />
+                <ScalarProperty Name="archive_path" ColumnName="archive_path" />
+                <ScalarProperty Name="data_path" ColumnName="data_path" />
+                <ScalarProperty Name="payment_center1" ColumnName="payment_center" />
+                <ScalarProperty Name="pc_id" ColumnName="pc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="view_payment_center" FunctionName="ebacs_via_linked_serverModel.Store.view_payment_center">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ebacs_via_linked_serverModel.view_payment_center_Result">
+                <ScalarProperty Name="pc_id" ColumnName="pc_id" />
+                <ScalarProperty Name="parse_amount_start" ColumnName="parse_amount_start" />
+                <ScalarProperty Name="parse_amount_end" ColumnName="parse_amount_end" />
+                <ScalarProperty Name="parse_atm_ref_start" ColumnName="parse_atm_ref_start" />
+                <ScalarProperty Name="parse_atm_ref_end" ColumnName="parse_atm_ref_end" />
+                <ScalarProperty Name="parse_date_start" ColumnName="parse_date_start" />
+                <ScalarProperty Name="parse_date_end" ColumnName="parse_date_end" />
+                <ScalarProperty Name="parse_prime_account_start" ColumnName="parse_prime_account_start" />
+                <ScalarProperty Name="parse_prime_account_end" ColumnName="parse_prime_account_end" />
+                <ScalarProperty Name="column_amount" ColumnName="column_amount" />
+                <ScalarProperty Name="column_atm_ref" ColumnName="column_atm_ref" />
+                <ScalarProperty Name="column_date" ColumnName="column_date" />
+                <ScalarProperty Name="column_prime_account" ColumnName="column_prime_account" />
+                <ScalarProperty Name="file_extension" ColumnName="file_extension" />
+                <ScalarProperty Name="separator" ColumnName="separator" />
+                <ScalarProperty Name="data_path" ColumnName="data_path" />
+                <ScalarProperty Name="archive_path" ColumnName="archive_path" />
+                <ScalarProperty Name="payment_center" ColumnName="payment_center" />
+                <ScalarProperty Name="nSpecial" ColumnName="nSpecial" />
+                <ScalarProperty Name="specialStringForDate" ColumnName="specialStringForDate" />
+                <ScalarProperty Name="result_path" ColumnName="result_path" />
+                <ScalarProperty Name="error_path" ColumnName="error_path" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

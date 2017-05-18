@@ -1,0 +1,8 @@
+H:\visual studio\payment posting\payment_posting\payment_posting\bin\Debug\payment_posting.exe.config
+H:\visual studio\payment posting\payment_posting\payment_posting\bin\Debug\payment_posting.exe
+H:\visual studio\payment posting\payment_posting\payment_posting\bin\Debug\payment_posting.pdb
+H:\visual studio\payment posting\payment_posting\payment_posting\bin\Debug\EntityFramework.dll
+H:\visual studio\payment posting\payment_posting\payment_posting\bin\Debug\EntityFramework.xml
+H:\visual studio\payment posting\payment_posting\payment_posting\obj\Debug\payment_posting.csprojResolveAssemblyReference.cache
+H:\visual studio\payment posting\payment_posting\payment_posting\obj\Debug\payment_posting.exe
+H:\visual studio\payment posting\payment_posting\payment_posting\obj\Debug\payment_posting.pdb

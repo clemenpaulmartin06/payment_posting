@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ebacs_via_linked_serverModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="payment_center">
+    <Key>
+      <PropertyRef Name="pc_id" />
+    </Key>
+    <Property Name="pc_id" Type="int" Nullable="false" />
+    <Property Name="payment_center" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="data_path" Type="varchar" MaxLength="1000" />
+    <Property Name="archive_path" Type="varchar" MaxLength="1000" />
+    <Property Name="nActive" Type="int" />
+    <Property Name="nSpecial" Type="int" />
+    <Property Name="specialStringForDate" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Function Name="ClearTreasurerReceipts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nReceiptType" Type="tinyint" Mode="In" />
+  </Function>
+  <Function Name="CollPostPaymentMain1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="sORNo" Type="varchar" Mode="In" />
+    <Parameter Name="sAccountID" Type="varchar" Mode="In" />
+    <Parameter Name="nORAmount" Type="decimal" Mode="In" />
+    <Parameter Name="dPaymentDate" Type="smalldatetime" Mode="In" />
+    <Parameter Name="bReConnect" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="GenerateTreasurerReceipt1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dFromPaymentDate" Type="smalldatetime" Mode="In" />
+    <Parameter Name="dToPaymentDate" Type="smalldatetime" Mode="In" />
+    <Parameter Name="dTreasurerReceiptDate" Type="smalldatetime" Mode="In" />
+    <Parameter Name="nFromTerminalID" Type="tinyint" Mode="In" />
+    <Parameter Name="nToTerminalID" Type="tinyint" Mode="In" />
+    <Parameter Name="nReceiptType" Type="tinyint" Mode="In" />
+  </Function>
+  <Function Name="getMOInProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetTotalBillingAmountPerDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dFrDate" Type="smalldatetime" Mode="In" />
+    <Parameter Name="dToDate" Type="smalldatetime" Mode="In" />
+  </Function>
+  <Function Name="GetTotalCollectionAmountPerDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dFrDate" Type="smalldatetime" Mode="In" />
+    <Parameter Name="dToDate" Type="smalldatetime" Mode="In" />
+  </Function>
+  <Function Name="GetTotalOtherBillingAmountPerDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dFrDate" Type="smalldatetime" Mode="In" />
+    <Parameter Name="dToDate" Type="smalldatetime" Mode="In" />
+  </Function>
+  <Function Name="parse_data_format" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pc_id" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="view_payment_center" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="ebacs_via_linked_serverModelStoreContainer">
+    <EntitySet Name="payment_center" EntityType="Self.payment_center" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ebacs_via_linked_serverModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="paymentEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="parse_data_format" ReturnType="Collection(ebacs_via_linked_serverModel.parse_data_format_Result)">
+      <Parameter Name="pc_id" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ClearTreasurerReceipts" ReturnType="Collection(Int32)">
+      <Parameter Name="nReceiptType" Mode="In" Type="Byte" />
+    </FunctionImport>
+    <FunctionImport Name="CollPostPaymentMain1" ReturnType="Collection(Int32)">
+      <Parameter Name="sORNo" Mode="In" Type="String" />
+      <Parameter Name="sAccountID" Mode="In" Type="String" />
+      <Parameter Name="nORAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="dPaymentDate" Mode="In" Type="DateTime" />
+      <Parameter Name="bReConnect" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="GenerateTreasurerReceipt1" ReturnType="Collection(Int32)">
+      <Parameter Name="dFromPaymentDate" Mode="In" Type="DateTime" />
+      <Parameter Name="dToPaymentDate" Mode="In" Type="DateTime" />
+      <Parameter Name="dTreasurerReceiptDate" Mode="In" Type="DateTime" />
+      <Parameter Name="nFromTerminalID" Mode="In" Type="Byte" />
+      <Parameter Name="nToTerminalID" Mode="In" Type="Byte" />
+      <Parameter Name="nReceiptType" Mode="In" Type="Byte" />
+    </FunctionImport>
+    <FunctionImport Name="getMOInProgress" ReturnType="Collection(ebacs_via_linked_serverModel.getMOInProgress_Result)" />
+    <FunctionImport Name="GetTotalBillingAmountPerDateRange" ReturnType="Collection(Decimal)">
+      <Parameter Name="dFrDate" Mode="In" Type="DateTime" />
+      <Parameter Name="dToDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetTotalCollectionAmountPerDateRange" ReturnType="Collection(Decimal)">
+      <Parameter Name="dFrDate" Mode="In" Type="DateTime" />
+      <Parameter Name="dToDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetTotalOtherBillingAmountPerDateRange" ReturnType="Collection(Decimal)">
+      <Parameter Name="dFrDate" Mode="In" Type="DateTime" />
+      <Parameter Name="dToDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="payment_center" EntityType="ebacs_via_linked_serverModel.payment_center" />
+    <FunctionImport Name="view_payment_center" ReturnType="Collection(ebacs_via_linked_serverModel.view_payment_center_Result)" />
+  </EntityContainer>
+  <ComplexType Name="parse_data_format_Result">
+    <Property Type="String" Name="pc_id" Nullable="false" MaxLength="2" />
+    <Property Type="Int32" Name="parse_amount_start" Nullable="true" />
+    <Property Type="Int32" Name="parse_amount_end" Nullable="true" />
+    <Property Type="Int32" Name="parse_atm_ref_start" Nullable="true" />
+    <Property Type="Int32" Name="parse_atm_ref_end" Nullable="true" />
+    <Property Type="Int32" Name="parse_date_start" Nullable="true" />
+    <Property Type="Int32" Name="parse_date_end" Nullable="true" />
+    <Property Type="Int32" Name="parse_prime_account_start" Nullable="true" />
+    <Property Type="Int32" Name="parse_prime_account_end" Nullable="true" />
+    <Property Type="Int32" Name="column_amount" Nullable="true" />
+    <Property Type="Int32" Name="column_atm_ref" Nullable="true" />
+    <Property Type="Int32" Name="column_date" Nullable="true" />
+    <Property Type="Int32" Name="column_prime_account" Nullable="true" />
+    <Property Type="String" Name="file_extension" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="separator" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="data_path" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="archive_path" Nullable="true" MaxLength="1000" />
+  </ComplexType>
+  <ComplexType Name="getMOInProgress_Result">
+    <Property Type="String" Name="sDescription" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="nBookSequence" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="payment_center">
+    <Key>
+      <PropertyRef Name="pc_id" />
+    </Key>
+    <Property Name="pc_id" Type="Int32" Nullable="false" />
+    <Property Name="payment_center1" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="data_path" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="archive_path" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="nActive" Type="Int32" />
+    <Property Name="nSpecial" Type="Int32" />
+    <Property Name="specialStringForDate" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <ComplexType Name="view_payment_center_Result">
+    <Property Type="Int32" Name="pc_id" Nullable="false" />
+    <Property Type="Int32" Name="parse_amount_start" Nullable="true" />
+    <Property Type="Int32" Name="parse_amount_end" Nullable="true" />
+    <Property Type="Int32" Name="parse_atm_ref_start" Nullable="true" />
+    <Property Type="Int32" Name="parse_atm_ref_end" Nullable="true" />
+    <Property Type="Int32" Name="parse_date_start" Nullable="true" />
+    <Property Type="Int32" Name="parse_date_end" Nullable="true" />
+    <Property Type="Int32" Name="parse_prime_account_start" Nullable="true" />
+    <Property Type="Int32" Name="parse_prime_account_end" Nullable="true" />
+    <Property Type="Int32" Name="column_amount" Nullable="true" />
+    <Property Type="Int32" Name="column_atm_ref" Nullable="true" />
+    <Property Type="Int32" Name="column_date" Nullable="true" />
+    <Property Type="Int32" Name="column_prime_account" Nullable="true" />
+    <Property Type="String" Name="file_extension" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="separator" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="data_path" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="archive_path" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="payment_center" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="nSpecial" Nullable="true" />
+    <Property Type="String" Name="specialStringForDate" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="result_path" Nullable="true" MaxLength="1500" />
+    <Property Type="String" Name="error_path" Nullable="true" MaxLength="1500" />
+  </ComplexType>
+</Schema>

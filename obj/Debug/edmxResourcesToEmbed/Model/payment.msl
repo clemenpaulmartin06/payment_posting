@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ebacs_via_linked_serverModelStoreContainer" CdmEntityContainer="paymentEntities">
+    <FunctionImportMapping FunctionImportName="parse_data_format" FunctionName="ebacs_via_linked_serverModel.Store.parse_data_format">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ebacs_via_linked_serverModel.parse_data_format_Result">
+          <ScalarProperty Name="pc_id" ColumnName="pc_id" />
+          <ScalarProperty Name="parse_amount_start" ColumnName="parse_amount_start" />
+          <ScalarProperty Name="parse_amount_end" ColumnName="parse_amount_end" />
+          <ScalarProperty Name="parse_atm_ref_start" ColumnName="parse_atm_ref_start" />
+          <ScalarProperty Name="parse_atm_ref_end" ColumnName="parse_atm_ref_end" />
+          <ScalarProperty Name="parse_date_start" ColumnName="parse_date_start" />
+          <ScalarProperty Name="parse_date_end" ColumnName="parse_date_end" />
+          <ScalarProperty Name="parse_prime_account_start" ColumnName="parse_prime_account_start" />
+          <ScalarProperty Name="parse_prime_account_end" ColumnName="parse_prime_account_end" />
+          <ScalarProperty Name="column_amount" ColumnName="column_amount" />
+          <ScalarProperty Name="column_atm_ref" ColumnName="column_atm_ref" />
+          <ScalarProperty Name="column_date" ColumnName="column_date" />
+          <ScalarProperty Name="column_prime_account" ColumnName="column_prime_account" />
+          <ScalarProperty Name="file_extension" ColumnName="file_extension" />
+          <ScalarProperty Name="separator" ColumnName="separator" />
+          <ScalarProperty Name="data_path" ColumnName="data_path" />
+          <ScalarProperty Name="archive_path" ColumnName="archive_path" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ClearTreasurerReceipts" FunctionName="ebacs_via_linked_serverModel.Store.ClearTreasurerReceipts" />
+    <FunctionImportMapping FunctionImportName="CollPostPaymentMain1" FunctionName="ebacs_via_linked_serverModel.Store.CollPostPaymentMain1" />
+    <FunctionImportMapping FunctionImportName="GenerateTreasurerReceipt1" FunctionName="ebacs_via_linked_serverModel.Store.GenerateTreasurerReceipt1" />
+    <FunctionImportMapping FunctionImportName="getMOInProgress" FunctionName="ebacs_via_linked_serverModel.Store.getMOInProgress">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ebacs_via_linked_serverModel.getMOInProgress_Result">
+          <ScalarProperty Name="sDescription" ColumnName="sDescription" />
+          <ScalarProperty Name="nBookSequence" ColumnName="nBookSequence" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetTotalBillingAmountPerDateRange" FunctionName="ebacs_via_linked_serverModel.Store.GetTotalBillingAmountPerDateRange" />
+    <FunctionImportMapping FunctionImportName="GetTotalCollectionAmountPerDateRange" FunctionName="ebacs_via_linked_serverModel.Store.GetTotalCollectionAmountPerDateRange" />
+    <FunctionImportMapping FunctionImportName="GetTotalOtherBillingAmountPerDateRange" FunctionName="ebacs_via_linked_serverModel.Store.GetTotalOtherBillingAmountPerDateRange" />
+    <EntitySetMapping Name="payment_center">
+      <EntityTypeMapping TypeName="ebacs_via_linked_serverModel.payment_center">
+        <MappingFragment StoreEntitySet="payment_center">
+          <ScalarProperty Name="specialStringForDate" ColumnName="specialStringForDate" />
+          <ScalarProperty Name="nSpecial" ColumnName="nSpecial" />
+          <ScalarProperty Name="nActive" ColumnName="nActive" />
+          <ScalarProperty Name="archive_path" ColumnName="archive_path" />
+          <ScalarProperty Name="data_path" ColumnName="data_path" />
+          <ScalarProperty Name="payment_center1" ColumnName="payment_center" />
+          <ScalarProperty Name="pc_id" ColumnName="pc_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="view_payment_center" FunctionName="ebacs_via_linked_serverModel.Store.view_payment_center">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ebacs_via_linked_serverModel.view_payment_center_Result">
+          <ScalarProperty Name="pc_id" ColumnName="pc_id" />
+          <ScalarProperty Name="parse_amount_start" ColumnName="parse_amount_start" />
+          <ScalarProperty Name="parse_amount_end" ColumnName="parse_amount_end" />
+          <ScalarProperty Name="parse_atm_ref_start" ColumnName="parse_atm_ref_start" />
+          <ScalarProperty Name="parse_atm_ref_end" ColumnName="parse_atm_ref_end" />
+          <ScalarProperty Name="parse_date_start" ColumnName="parse_date_start" />
+          <ScalarProperty Name="parse_date_end" ColumnName="parse_date_end" />
+          <ScalarProperty Name="parse_prime_account_start" ColumnName="parse_prime_account_start" />
+          <ScalarProperty Name="parse_prime_account_end" ColumnName="parse_prime_account_end" />
+          <ScalarProperty Name="column_amount" ColumnName="column_amount" />
+          <ScalarProperty Name="column_atm_ref" ColumnName="column_atm_ref" />
+          <ScalarProperty Name="column_date" ColumnName="column_date" />
+          <ScalarProperty Name="column_prime_account" ColumnName="column_prime_account" />
+          <ScalarProperty Name="file_extension" ColumnName="file_extension" />
+          <ScalarProperty Name="separator" ColumnName="separator" />
+          <ScalarProperty Name="data_path" ColumnName="data_path" />
+          <ScalarProperty Name="archive_path" ColumnName="archive_path" />
+          <ScalarProperty Name="payment_center" ColumnName="payment_center" />
+          <ScalarProperty Name="nSpecial" ColumnName="nSpecial" />
+          <ScalarProperty Name="specialStringForDate" ColumnName="specialStringForDate" />
+          <ScalarProperty Name="result_path" ColumnName="result_path" />
+          <ScalarProperty Name="error_path" ColumnName="error_path" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
